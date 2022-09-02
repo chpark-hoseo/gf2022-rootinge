@@ -1,7 +1,7 @@
 ﻿// SDL 
 //
 // written by changhoonpark@gmail.com
-
+// 2019159	박종현
 
 #include "main.h"
 
