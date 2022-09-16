@@ -4,6 +4,44 @@
 SDL_Window* g_pWindow = 0;
 SDL_Renderer* g_pRenderer = 0;
 bool g_bRunning = false; // render함수의 반복하는지의 변수
+int num = 0;
+
+bool init(const char* title, int xpos, int ypos, int height, int width, int flags);
+void render();
+void Update();
+
+
+int main(int argc, char* argv[])
+{
+    if (init("Breaking Up HelloSDL", SDL_WINDOWPOS_CENTERED,
+        SDL_WINDOWPOS_CENTERED, 640, 480,
+        SDL_WINDOW_SHOWN))
+    {
+        g_bRunning = true;
+    }
+    else
+    {
+        return 1;
+    }
+
+    while (g_bRunning)
+    {
+        // handle input - update - render
+        if (num == 10)
+        {
+            break;
+        }
+        else
+        {
+            num++;
+        }
+        Update();
+        render();
+    }
+
+    SDL_Quit();
+    return 0;
+}
 
 bool init(const char* title, int xpos, int ypos, int height, int width, int flags)
 {
@@ -29,10 +67,7 @@ bool init(const char* title, int xpos, int ypos, int height, int width, int flag
 void render()
 {
     SDL_RenderClear(g_pRenderer);
-
     // 그리기 수행
-   
-
     SDL_RenderPresent(g_pRenderer);
 }
 
@@ -43,27 +78,5 @@ void Update()
     SDL_Delay(1000);
 }
 
-int main(int argc, char* argv[])
-{
-    if (init("Breaking Up HelloSDL", SDL_WINDOWPOS_CENTERED,
-        SDL_WINDOWPOS_CENTERED, 640, 480,
-        SDL_WINDOW_SHOWN))
-    {
-        g_bRunning = true;
-    }
-    else
-    {
-        return 1; // something's wrong
-    }
 
-    while (g_bRunning)
-    {
-        // handle input - update - render
-        Update();
-        render();
-    }
-
-    SDL_Quit();
-    return 0;
-}
 
