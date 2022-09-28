@@ -21,6 +21,8 @@ private:
 	SDL_Renderer* m_pRenderer;
 	bool m_bRunning;
 	bool m_turn;
+	int SCREEN_WIDTH = 480;
+	int SCREEN_HEIGHT = 640;
 
 	SDL_Texture* m_pTexture;
 	// 원본 사각형

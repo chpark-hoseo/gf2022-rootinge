@@ -24,7 +24,7 @@ bool Game::init(const char* title, int xpos, int ypos, int height, int width, in
     else {
         return false; // SDL 초기화 실패
     }
-
+  
     SDL_Surface* pTempSurface = SDL_LoadBMP("assets/rider.bmp");
 
     m_pTexture = SDL_CreateTextureFromSurface(m_pRenderer, pTempSurface);
@@ -58,6 +58,8 @@ bool Game::init(const char* title, int xpos, int ypos, int height, int width, in
     m_destinationRectangle1.x = 240 - m_destinationRectangle1.w/2;
     m_destinationRectangle1.y = 320 - m_destinationRectangle1.h/2;
 
+
+
     return true;
 }
 
@@ -82,10 +84,32 @@ void Game::update()
 
 void Game::render()
 {
-    SDL_RenderClear(m_pRenderer);
+   /* SDL_RenderClear(m_pRenderer);
     SDL_RenderCopy(m_pRenderer, m_pDogge, &m_sourceRectangle1, &m_destinationRectangle1);
     SDL_RenderCopy(m_pRenderer, m_pTexture, &m_sourceRectangle, &m_destinationRectangle);
+    SDL_RenderPresent(m_pRenderer);*/
+
+    SDL_SetRenderDrawColor(m_pRenderer, 255, 255, 255, 255);
+    SDL_RenderClear(m_pRenderer);
+
+    SDL_Rect fillRect = { SCREEN_WIDTH / 4, SCREEN_HEIGHT / 4, SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2 };
+    SDL_SetRenderDrawColor(m_pRenderer, 255, 0, 0, 255);
+    SDL_RenderFillRect(m_pRenderer, &fillRect);
+
+    SDL_Rect outlineRect = { SCREEN_WIDTH / 6, SCREEN_HEIGHT / 6, SCREEN_WIDTH * 2 / 3, SCREEN_HEIGHT * 2 / 3 };
+    SDL_SetRenderDrawColor(m_pRenderer, 0, 255, 0, 255);
+    SDL_RenderDrawRect(m_pRenderer, &outlineRect);
+
+    SDL_SetRenderDrawColor(m_pRenderer, 0, 0, 255, 255);
+    SDL_RenderDrawLine(m_pRenderer, 0, SCREEN_HEIGHT / 2, SCREEN_WIDTH, SCREEN_HEIGHT / 2);
+
+    SDL_SetRenderDrawColor(m_pRenderer, 255, 255, 0, 255);
+    for (int i = 0; i < SCREEN_HEIGHT; i += 4)
+    {
+        SDL_RenderDrawPoint(m_pRenderer, SCREEN_WIDTH / 2, i);
+    }
     SDL_RenderPresent(m_pRenderer);
+
 
 }
 
