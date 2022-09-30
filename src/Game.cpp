@@ -24,7 +24,9 @@ bool Game::init(const char* title, int xpos, int ypos, int height, int width, in
     else {
         return false; // SDL 초기화 실패
     }
-  
+    SCREEN_WIDTH = width;
+    SCREEN_HEIGHT = height;
+
     SDL_Surface* pTempSurface = SDL_LoadBMP("assets/rider.bmp");
 
     m_pTexture = SDL_CreateTextureFromSurface(m_pRenderer, pTempSurface);
@@ -34,83 +36,55 @@ bool Game::init(const char* title, int xpos, int ypos, int height, int width, in
     SDL_QueryTexture(m_pTexture, NULL, NULL,
         &m_sourceRectangle.w, &m_sourceRectangle.h);
     // 대상상자의 너비/높이 설정
-    m_destinationRectangle.w = m_sourceRectangle.w;
-    m_destinationRectangle.h = m_sourceRectangle.h;
+    /*m_destinationRectangle.w = m_sourceRectangle.w;
+    m_destinationRectangle.h = m_sourceRectangle.h;*/
+    
+    //원본상자
+    m_sourceRectangle.w = 50;
+    m_sourceRectangle.h = 50;
+    //대상상자
+    m_destinationRectangle.w = 123;
+    m_destinationRectangle.h = 87;
+
+
     //원본상자/대상상자의 위치 설정
-    m_destinationRectangle.x = m_sourceRectangle.x = 0;
-    m_destinationRectangle.y = m_sourceRectangle.y = 0;
+    m_sourceRectangle.x = 0;
+    m_sourceRectangle.y = 0;
+
+    m_destinationRectangle.x = 0;
+    m_destinationRectangle.y = 0;
+
     m_bRunning = true;
     m_turn = true;
-
-    SDL_Surface* pDogge = IMG_Load("assets/Dogge.png");
-
-    m_pDogge = SDL_CreateTextureFromSurface(m_pRenderer, pDogge);
-
-    SDL_FreeSurface(pDogge);
-
-    SDL_QueryTexture(m_pDogge, NULL, NULL, &m_sourceRectangle1.w, &m_sourceRectangle1.h);
-
-    m_destinationRectangle1.w = m_sourceRectangle1.w * 6;
-    m_destinationRectangle1.h = m_sourceRectangle1.h * 6;
-    //원본상자/대상상자의 위치 설정
-    m_destinationRectangle1.x = m_sourceRectangle1.x = 0;
-    m_destinationRectangle1.y = m_sourceRectangle1.y = 0;
-    m_destinationRectangle1.x = 240 - m_destinationRectangle1.w/2;
-    m_destinationRectangle1.y = 320 - m_destinationRectangle1.h/2;
-
-
 
     return true;
 }
 
 void Game::update()
 {
-    // 반복 운동
-    if (m_turn)
-    {
-        m_destinationRectangle.x += 1;
-        SDL_Delay(10);
-        if (m_destinationRectangle.x > 480 - m_sourceRectangle.w)
-            m_turn = false;
-    }
-    else
-    {
-        m_destinationRectangle.x -= 1;
-        SDL_Delay(10);
-        if (m_destinationRectangle.x < 0)
-            m_turn = true;
-    }
+    //// 반복 운동
+    //if (m_turn)
+    //{
+    //    m_destinationRectangle.x += 1;
+    //    SDL_Delay(10);
+    //    if (m_destinationRectangle.x > 480 - m_sourceRectangle.w)
+    //        m_turn = false;
+    //}
+    //else
+    //{
+    //    m_destinationRectangle.x -= 1;
+    //    SDL_Delay(10);
+    //    if (m_destinationRectangle.x < 0)
+    //        m_turn = true;
+    //}
+    
 }
 
 void Game::render()
 {
-   /* SDL_RenderClear(m_pRenderer);
-    SDL_RenderCopy(m_pRenderer, m_pDogge, &m_sourceRectangle1, &m_destinationRectangle1);
-    SDL_RenderCopy(m_pRenderer, m_pTexture, &m_sourceRectangle, &m_destinationRectangle);
-    SDL_RenderPresent(m_pRenderer);*/
-
-    SDL_SetRenderDrawColor(m_pRenderer, 255, 255, 255, 255);
     SDL_RenderClear(m_pRenderer);
-
-    SDL_Rect fillRect = { SCREEN_WIDTH / 4, SCREEN_HEIGHT / 4, SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2 };
-    SDL_SetRenderDrawColor(m_pRenderer, 255, 0, 0, 255);
-    SDL_RenderFillRect(m_pRenderer, &fillRect);
-
-    SDL_Rect outlineRect = { SCREEN_WIDTH / 6, SCREEN_HEIGHT / 6, SCREEN_WIDTH * 2 / 3, SCREEN_HEIGHT * 2 / 3 };
-    SDL_SetRenderDrawColor(m_pRenderer, 0, 255, 0, 255);
-    SDL_RenderDrawRect(m_pRenderer, &outlineRect);
-
-    SDL_SetRenderDrawColor(m_pRenderer, 0, 0, 255, 255);
-    SDL_RenderDrawLine(m_pRenderer, 0, SCREEN_HEIGHT / 2, SCREEN_WIDTH, SCREEN_HEIGHT / 2);
-
-    SDL_SetRenderDrawColor(m_pRenderer, 255, 255, 0, 255);
-    for (int i = 0; i < SCREEN_HEIGHT; i += 4)
-    {
-        SDL_RenderDrawPoint(m_pRenderer, SCREEN_WIDTH / 2, i);
-    }
+    SDL_RenderCopy(m_pRenderer, m_pTexture, &m_sourceRectangle, &m_destinationRectangle);
     SDL_RenderPresent(m_pRenderer);
-
-
 }
 
 bool Game::running()
