@@ -27,30 +27,22 @@ bool Game::init(const char* title, int xpos, int ypos, int height, int width, in
     SCREEN_WIDTH = width;
     SCREEN_HEIGHT = height;
 
-    SDL_Surface* pTempSurface = SDL_LoadBMP("assets/rider.bmp");
+    SDL_Surface* pTempSurface = SDL_LoadBMP("assets/animate.bmp");
 
     m_pTexture = SDL_CreateTextureFromSurface(m_pRenderer, pTempSurface);
 
     SDL_FreeSurface(pTempSurface);
-    // 원본상자의 너비/높이 설정
-    SDL_QueryTexture(m_pTexture, NULL, NULL,
-        &m_sourceRectangle.w, &m_sourceRectangle.h);
+
+
     // 대상상자의 너비/높이 설정
-
-    //원본상자
-    //m_sourceRectangle.w = 50;
-    //m_sourceRectangle.h = 50;
-    //대상상자
-    m_destinationRectangle.w = width;
-    m_destinationRectangle.h = height;
-
+    m_sourceRectangle.w = 128;
+    m_sourceRectangle.h = 82;
+    m_destinationRectangle.w = m_sourceRectangle.w;
+    m_destinationRectangle.h = m_sourceRectangle.h;
 
     //원본상자/대상상자의 위치 설정
-    m_sourceRectangle.x = 0;
-    m_sourceRectangle.y = 0;
-
-    m_destinationRectangle.x = 0;
-    m_destinationRectangle.y = 0;
+    m_destinationRectangle.x = m_sourceRectangle.x = 0;
+    m_destinationRectangle.y = m_sourceRectangle.y = 0;
 
     m_bRunning = true;
     m_turn = true;
