@@ -43,8 +43,8 @@ bool Game::init(const char* title, int xpos, int ypos, int height, int width, in
     m_sourceRectangle.w = 50;
     m_sourceRectangle.h = 50;
     //대상상자
-    m_destinationRectangle.w = 123;
-    m_destinationRectangle.h = 87;
+    m_destinationRectangle.w = 50;
+    m_destinationRectangle.h = 50;
 
 
     //원본상자/대상상자의 위치 설정
