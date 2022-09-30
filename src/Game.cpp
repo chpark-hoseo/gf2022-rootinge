@@ -52,22 +52,7 @@ bool Game::init(const char* title, int xpos, int ypos, int height, int width, in
 
 void Game::update()
 {
-    //// 반복 운동
-    //if (m_turn)
-    //{
-    //    m_destinationRectangle.x += 1;
-    //    SDL_Delay(10);
-    //    if (m_destinationRectangle.x > 480 - m_sourceRectangle.w)
-    //        m_turn = false;
-    //}
-    //else
-    //{
-    //    m_destinationRectangle.x -= 1;
-    //    SDL_Delay(10);
-    //    if (m_destinationRectangle.x < 0)
-    //        m_turn = true;
-    //}
-    
+    m_sourceRectangle.x = 128 * ((SDL_GetTicks() / 100) % 6);
 }
 
 void Game::render()
