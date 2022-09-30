@@ -38,19 +38,19 @@ bool Game::init(const char* title, int xpos, int ypos, int height, int width, in
     // 대상상자의 너비/높이 설정
 
     //원본상자
-    m_sourceRectangle.w = 50;
-    m_sourceRectangle.h = 50;
+    //m_sourceRectangle.w = 50;
+    //m_sourceRectangle.h = 50;
     //대상상자
-    m_destinationRectangle.w = m_sourceRectangle.w;
-    m_destinationRectangle.h = m_sourceRectangle.h;
+    m_destinationRectangle.w = width;
+    m_destinationRectangle.h = height;
 
 
     //원본상자/대상상자의 위치 설정
-    m_sourceRectangle.x = 50;
-    m_sourceRectangle.y = 50;
+    m_sourceRectangle.x = 0;
+    m_sourceRectangle.y = 0;
 
-    m_destinationRectangle.x = 200;
-    m_destinationRectangle.y = 200;
+    m_destinationRectangle.x = 0;
+    m_destinationRectangle.y = 0;
 
     m_bRunning = true;
     m_turn = true;
