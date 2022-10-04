@@ -30,7 +30,13 @@ private:
 	// 대상 사각형
 	SDL_Rect m_destinationRectangle;
 
-	SDL_Texture* m_pDogge;
+	SDL_Texture* m_pTexture_1;
+	// 원본 사각형
+	SDL_Rect m_sourceRectangle_1;
+	// 대상 사각형
+	SDL_Rect m_destinationRectangle_1;
+
+	SDL_Texture* m_pugegg;
 
 	SDL_Rect m_sourceRectangle1;
 	// 대상 사각형
