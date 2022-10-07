@@ -2,6 +2,7 @@
 #define __Game__
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_image.h>
+#include "TextureManager.h"
 
 class Game
 {
@@ -24,24 +25,9 @@ private:
 	int SCREEN_WIDTH;
 	int SCREEN_HEIGHT;
 
-	SDL_Texture* m_pTexture;
-	// 원본 사각형
-	SDL_Rect m_sourceRectangle;
-	// 대상 사각형
-	SDL_Rect m_destinationRectangle;
-
-	SDL_Texture* m_pTexture_1;
-	// 원본 사각형
-	SDL_Rect m_sourceRectangle_1;
-	// 대상 사각형
-	SDL_Rect m_destinationRectangle_1;
-
-	SDL_Texture* m_pugegg;
-
-	SDL_Rect m_sourceRectangle1;
-	// 대상 사각형
-	SDL_Rect m_destinationRectangle1;
-
+	TextureManager m_textureManager;
+	int m_currentFrame;
+	int m_currentFrame_1;
 };
 
 #endif /* defined(__Game__) */
