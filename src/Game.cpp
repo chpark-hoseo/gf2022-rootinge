@@ -9,8 +9,7 @@ bool Game::init(const char* title, int xpos, int ypos, int height, int width, in
             m_pRenderer = SDL_CreateRenderer(m_pWindow, -1, 0);
 
             if (m_pRenderer != 0) {
-                /*SDL_SetRenderDrawColor(
-                    m_pRenderer, 255, 255, 255, 255);*/
+               SDL_SetRenderDrawColor(m_pRenderer, 255, 0, 0, 255); // 붉은색 배경
 
             }
             else {
@@ -29,7 +28,7 @@ bool Game::init(const char* title, int xpos, int ypos, int height, int width, in
 
     // 개
     {
-        SDL_Surface* pTempSurface = SDL_LoadBMP("assets/animate.bmp");
+        SDL_Surface* pTempSurface = IMG_Load("Assets/animate-alpha.png");
 
         m_pTexture = SDL_CreateTextureFromSurface(m_pRenderer, pTempSurface);
 
@@ -68,7 +67,7 @@ bool Game::init(const char* title, int xpos, int ypos, int height, int width, in
         m_destinationRectangle_1.y = 82;
     }
     // 커비
-    {
+    /*{
         SDL_Surface* pTempSurface1 = IMG_Load("assets/pngegg.png");
 
         m_pugegg = SDL_CreateTextureFromSurface(m_pRenderer, pTempSurface1);
@@ -86,20 +85,20 @@ bool Game::init(const char* title, int xpos, int ypos, int height, int width, in
         m_destinationRectangle1.x = m_sourceRectangle1.x = 130;
         m_destinationRectangle1.y = m_sourceRectangle1.y = 0;
 
-        m_bRunning = true;
-        m_turn = true;
+        
+    }*/
+    m_bRunning = true;
+    m_turn = true;
 
-        return true;
-    }
-
+    return true;
     
 }
 
 void Game::update()
 {
     m_sourceRectangle.x = 128 * ((SDL_GetTicks() / 100) % 6);
-    m_sourceRectangle_1.x = 128 * ((SDL_GetTicks() / 150) % 6);
-    m_sourceRectangle1.x = 67* ((SDL_GetTicks() / 100) % 8);
+    m_sourceRectangle_1.x = 128 * ((SDL_GetTicks() / 100) % 6);
+    //m_sourceRectangle1.x = 67* ((SDL_GetTicks() / 100) % 8);
 }
 
 void Game::render()
@@ -107,7 +106,7 @@ void Game::render()
     SDL_RenderClear(m_pRenderer);
     SDL_RenderCopy(m_pRenderer, m_pTexture, &m_sourceRectangle, &m_destinationRectangle);
     SDL_RenderCopy(m_pRenderer, m_pTexture_1, &m_sourceRectangle_1, &m_destinationRectangle_1);
-    SDL_RenderCopy(m_pRenderer, m_pugegg, &m_sourceRectangle1, &m_destinationRectangle1);
+    //SDL_RenderCopy(m_pRenderer, m_pugegg, &m_sourceRectangle1, &m_destinationRectangle1);
     SDL_RenderPresent(m_pRenderer);
 }
 
