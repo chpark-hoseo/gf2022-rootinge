@@ -28,6 +28,9 @@ private:
 	TextureManager m_textureManager;
 	int m_currentFrame;
 	int m_currentFrame_1;
+	int m_currentFrame_2;
+
+	int m_currentRow_2;
 };
 
 #endif /* defined(__Game__) */
