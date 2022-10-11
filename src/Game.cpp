@@ -36,7 +36,7 @@ bool Game::init(const char* title, int xpos, int ypos, int height, int width, in
 
 
     m_bRunning = true;
-    m_turn = true;
+    m_turn = false;
 
     return true;
     
@@ -47,8 +47,23 @@ void Game::update()
     m_currentFrame = ((SDL_GetTicks() / 100) % 6);
     m_currentFrame_1 = ((SDL_GetTicks() / 100) % 8);
 
-    m_currentRow_2 = ((SDL_GetTicks() / 100) % 4);
+    
     m_currentFrame_2 = ((SDL_GetTicks() / 100) % 5);
+    printf("1 %d %d\n", m_currentFrame_2, m_currentRow_2);
+    if (m_currentFrame_2 == 4 && m_turn)
+    {
+        m_turn = false;
+        printf("2 %d %d\n", m_currentFrame_2, m_currentRow_2);
+        m_currentRow_2++;
+        if (m_currentRow_2 == 4)
+        {
+            m_currentRow_2 = 0;
+        }
+    }
+    else if (m_currentFrame_2 == 0)
+    {
+        m_turn = true;
+    }
 }
 
 void Game::render()
