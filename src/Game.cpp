@@ -44,6 +44,8 @@ bool Game::init(const char* title, int xpos, int ypos, int height, int width, in
         //원본상자/대상상자의 위치 설정
         m_destinationRectangle.x = m_sourceRectangle.x = 0;
         m_destinationRectangle.y = m_sourceRectangle.y = 0;
+        m_destinationRectangle.y = 380;
+
     }
 
     // 개2
@@ -64,7 +66,7 @@ bool Game::init(const char* title, int xpos, int ypos, int height, int width, in
         //원본상자/대상상자의 위치 설정
         m_destinationRectangle_1.x = m_sourceRectangle_1.x = 0;
         m_destinationRectangle_1.y = m_sourceRectangle_1.y = 0;
-        m_destinationRectangle_1.y = 82;
+        
     }
     // 커비
     /*{
@@ -89,7 +91,7 @@ bool Game::init(const char* title, int xpos, int ypos, int height, int width, in
     }*/
     m_bRunning = true;
     m_turn = true;
-
+    m_jumping = 1;
     return true;
     
 }
@@ -98,6 +100,69 @@ void Game::update()
 {
     m_sourceRectangle.x = 128 * ((SDL_GetTicks() / 100) % 6);
     m_sourceRectangle_1.x = 128 * ((SDL_GetTicks() / 100) % 6);
+
+    if (m_jumping == 1)
+    {
+        m_destinationRectangle.y -= 2;
+        m_destinationRectangle.x += 1;
+        SDL_Delay(10);
+        if (m_destinationRectangle.y < 200)
+        {
+            m_jumping = 2;
+        }
+    }
+    else if (m_jumping == 2)
+    {
+        m_destinationRectangle.y -= 1;
+        m_destinationRectangle.x += 1;
+        SDL_Delay(10);
+        if (m_destinationRectangle.y < 190)
+        {
+            m_jumping = 3;
+        }
+    }
+    else if (m_jumping == 3)
+    {
+        m_destinationRectangle.y -= 1;
+        m_destinationRectangle.x += 1;
+        SDL_Delay(15);
+        if (m_destinationRectangle.y < 185)
+        {
+            m_jumping = 4;
+        }
+    }
+    else if (m_jumping == 4)
+    {
+        m_destinationRectangle.y += 1;
+        m_destinationRectangle.x += 1;
+        SDL_Delay(15);
+        if (m_destinationRectangle.y > 190)
+        {
+            m_jumping = 5;
+        }
+    }
+    else if (m_jumping == 5)
+    {
+        m_destinationRectangle.y += 1;
+        m_destinationRectangle.x += 1;
+        SDL_Delay(1);
+        if (m_destinationRectangle.y > 200)
+        {
+            m_jumping = 6;
+        }
+    }
+    else
+    {
+        m_destinationRectangle.y += 3;
+        m_destinationRectangle.x += 1;
+        SDL_Delay(10);
+        if (m_destinationRectangle.y > 380)
+        {
+            m_destinationRectangle.y = 380;
+            m_destinationRectangle.x = 0;
+            m_jumping = 1;
+        }
+    }
     //m_sourceRectangle1.x = 67* ((SDL_GetTicks() / 100) % 8);
 }
 

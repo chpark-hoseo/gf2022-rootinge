@@ -23,6 +23,7 @@ private:
 	bool m_turn;
 	int SCREEN_WIDTH;
 	int SCREEN_HEIGHT;
+	int m_jumping;
 
 	SDL_Texture* m_pTexture;
 	// 원본 사각형
