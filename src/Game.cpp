@@ -49,11 +49,9 @@ void Game::update()
 
     
     m_currentFrame_2 = ((SDL_GetTicks() / 100) % 5);
-    printf("1 %d %d\n", m_currentFrame_2, m_currentRow_2);
     if (m_currentFrame_2 == 4 && m_turn)
     {
         m_turn = false;
-        printf("2 %d %d\n", m_currentFrame_2, m_currentRow_2);
         m_currentRow_2++;
         if (m_currentRow_2 == 4)
         {
