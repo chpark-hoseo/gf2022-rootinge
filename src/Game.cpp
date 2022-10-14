@@ -26,12 +26,25 @@ bool Game::init(const char* title, int xpos, int ypos, int height, int width, in
     SCREEN_WIDTH = width;
     SCREEN_HEIGHT = height;
 
-    m_textureManager.load("assets/animate-alpha.png", "animate", m_pRenderer);
+    if (!TheTextureManager::Instance()->load("Assets/animate-alpha.png", "animate", m_pRenderer))
+    {
+        return false;
+    }
 
-    m_textureManager.load("assets/pngegg.png", "pngegg", m_pRenderer);
+    if (!TheTextureManager::Instance()->load("assets/animate-alpha.png", "animate", m_pRenderer))
+    {
+        return false;
+    }
+   
+    if (!TheTextureManager::Instance()->load("assets/pngegg.png", "pngegg", m_pRenderer))
+    {
+        return false;
+    }
 
-
-    m_textureManager.load("assets/player_1.png", "player_1", m_pRenderer);
+    if (!TheTextureManager::Instance()->load("assets/player_1.png", "player_1", m_pRenderer))
+    {
+        return false;
+    }
 
 
 
@@ -68,13 +81,13 @@ void Game::render()
 {
     SDL_RenderClear(m_pRenderer);
 
-    m_textureManager.draw("animate", 0, 0, 128, 82, m_pRenderer);
+    TheTextureManager::Instance()->draw("animate", 0, 0, 128, 82, m_pRenderer);
 
-    m_textureManager.drawFrame("animate", 100, 100, 128, 82, 0, m_currentFrame, m_pRenderer);
+    TheTextureManager::Instance()->drawFrame("animate", 100, 100, 128, 82, 0, m_currentFrame, m_pRenderer);
 
-    m_textureManager.drawFrame("pngegg", 200, 200, 67, 72, 0, m_currentFrame_1, m_pRenderer);
+    TheTextureManager::Instance()->drawFrame("pngegg", 200, 200, 67, 72, 0, m_currentFrame_1, m_pRenderer);
 
-    m_textureManager.drawFrame("player_1", 300, 300, 50, 50, m_currentRow_2, m_currentFrame_2, m_pRenderer);
+    TheTextureManager::Instance()->drawFrame("player_1", 300, 300, 50, 50, m_currentRow_2, m_currentFrame_2, m_pRenderer);
 
     SDL_RenderPresent(m_pRenderer);
 }

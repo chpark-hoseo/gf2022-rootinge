@@ -25,7 +25,7 @@ private:
 	int SCREEN_WIDTH;
 	int SCREEN_HEIGHT;
 
-	TextureManager m_textureManager;
+
 	int m_currentFrame;
 	int m_currentFrame_1;
 	int m_currentFrame_2;
