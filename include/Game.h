@@ -22,8 +22,8 @@ private:
 	SDL_Renderer* m_pRenderer;
 	bool m_bRunning;
 	bool m_turn;
-	int SCREEN_WIDTH;
-	int SCREEN_HEIGHT;
+
+
 
 
 	int m_currentFrame;

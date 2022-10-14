@@ -9,7 +9,7 @@ bool Game::init(const char* title, int xpos, int ypos, int height, int width, in
             m_pRenderer = SDL_CreateRenderer(m_pWindow, -1, 0);
 
             if (m_pRenderer != 0) {
-               SDL_SetRenderDrawColor(m_pRenderer, 255, 0, 0, 255); // 붉은색 배경
+               SDL_SetRenderDrawColor(m_pRenderer, 255, 255, 0, 255); // 붉은색 배경
 
             }
             else {
@@ -23,15 +23,9 @@ bool Game::init(const char* title, int xpos, int ypos, int height, int width, in
     else {
         return false; // SDL 초기화 실패
     }
-    SCREEN_WIDTH = width;
-    SCREEN_HEIGHT = height;
+
 
     if (!TheTextureManager::Instance()->load("Assets/animate-alpha.png", "animate", m_pRenderer))
-    {
-        return false;
-    }
-
-    if (!TheTextureManager::Instance()->load("assets/animate-alpha.png", "animate", m_pRenderer))
     {
         return false;
     }
