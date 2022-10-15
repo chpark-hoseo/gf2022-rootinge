@@ -21,16 +21,7 @@ private:
 	SDL_Window* m_pWindow;
 	SDL_Renderer* m_pRenderer;
 	bool m_bRunning;
-	bool m_turn;
 
-
-
-
-	int m_currentFrame;
-	int m_currentFrame_1;
-	int m_currentFrame_2;
-
-	int m_currentRow_2 = 0;
 };
 
 #endif /* defined(__Game__) */
