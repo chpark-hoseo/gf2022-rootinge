@@ -9,7 +9,7 @@ bool Game::init(const char* title, int xpos, int ypos, int height, int width, in
             m_pRenderer = SDL_CreateRenderer(m_pWindow, -1, 0);
 
             if (m_pRenderer != 0) {
-               SDL_SetRenderDrawColor(m_pRenderer, 255, 255, 0, 255); // ºÓÀº»ö ¹è°æ
+               //SDL_SetRenderDrawColor(m_pRenderer, 255, 255, 0, 255); // ºÓÀº»ö ¹è°æ
 
             }
             else {
@@ -30,7 +30,10 @@ bool Game::init(const char* title, int xpos, int ypos, int height, int width, in
         return false;
     }*/
    
-
+    if (!TheTextureManager::Instance()->load("Assets/Scenery1.jpg", "Scenery1", m_pRenderer))
+    {
+        return false;
+    }
 
     m_bRunning = true;
 
@@ -50,7 +53,7 @@ void Game::render()
 
  //   TheTextureManager::Instance()->draw("animate", 0, 0, 128, 82, m_pRenderer);
  //   TheTextureManager::Instance()->drawFrame("animate", 100, 100, 128, 82, 0, m_currentFrame, m_pRenderer);
-
+    TheTextureManager::Instance()->draw("Scenery1", 52, 52, 535, 535, m_pRenderer);
 
 
     SDL_RenderPresent(m_pRenderer);
