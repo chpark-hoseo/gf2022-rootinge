@@ -3,9 +3,22 @@
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_image.h>
 #include "TextureManager.h"
+#include "Enemy.h"
+#include "Vector.h"
+
+static int Enemynum = -1;
+static int is_x[100];
+static int is_y[100];
 
 class Game
 {
+private:
+	Vector m_Vector;
+	SDL_Window* m_pWindow;
+	SDL_Renderer* m_pRenderer;
+	EnemySystem m_EnemySystem;
+	bool m_bRunning;
+
 public:
 	Game() { }
 	~Game() { }
@@ -17,11 +30,7 @@ public:
 	void handleEvents();
 	void clean();
 
-private: 
-	SDL_Window* m_pWindow;
-	SDL_Renderer* m_pRenderer;
-	bool m_bRunning;
-
 };
+
 
 #endif /* defined(__Game__) */

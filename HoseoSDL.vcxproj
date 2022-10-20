@@ -142,11 +142,15 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="src\Enemy.cpp" />
+    <ClCompile Include="src\Vctor.cpp" />
     <ClCompile Include="src\Game.cpp" />
     <ClCompile Include="src\main.cpp" />
     <ClCompile Include="src\TextureManager.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="include\Enemy.h" />
+    <ClInclude Include="include\Vector.h" />
     <ClInclude Include="include\Game.h" />
     <ClInclude Include="include\main.h" />
     <ClInclude Include="include\TextureManager.h" />

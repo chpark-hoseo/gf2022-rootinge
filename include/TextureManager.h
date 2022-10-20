@@ -35,4 +35,3 @@ public:
 
 };
 typedef TextureManager TheTextureManager;
-
