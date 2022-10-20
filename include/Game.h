@@ -3,6 +3,9 @@
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_image.h>
 #include "TextureManager.h"
+#include <time.h>
+#include <stdio.h>
+
 
 class Game
 {
@@ -16,6 +19,9 @@ public:
 	bool running();
 	void handleEvents();
 	void clean();
+	void randpuzzle();
+	void keyPad();
+	const Uint8* currentKeyStates = SDL_GetKeyboardState(NULL);
 
 private: 
 	SDL_Window* m_pWindow;
@@ -23,8 +29,12 @@ private:
 	bool m_bRunning;
 	bool m_turn;
 
+	int Puzzle_X[9] = { 50, 233, 416, 50, 233, 416, 50, 233, 416};
+	int Puzzle_y[9] = { 50, 50, 50, 233, 233, 233, 416, 416, 416};
+	int Puzzle_i[9] = {0,1,2,3,4,5,6,7,8};
 
-
+	int move_x = 0;
+	int move_y = 0;
 
 	int m_currentFrame;
 	int m_currentFrame_1;

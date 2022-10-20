@@ -32,7 +32,8 @@ public:
         int currentRow, int currentFrame,
         SDL_Renderer* pRenderer, SDL_RendererFlip flip = SDL_FLIP_NONE);
 
-
+    bool loadkey(std::string fileName,
+        std::string id, SDL_Renderer* pRenderer);
 };
 typedef TextureManager TheTextureManager;
 

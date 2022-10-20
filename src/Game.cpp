@@ -9,7 +9,7 @@ bool Game::init(const char* title, int xpos, int ypos, int height, int width, in
             m_pRenderer = SDL_CreateRenderer(m_pWindow, -1, 0);
 
             if (m_pRenderer != 0) {
-               SDL_SetRenderDrawColor(m_pRenderer, 255, 255, 0, 255); // 붉은색 배경
+               //SDL_SetRenderDrawColor(m_pRenderer, 255, 255, 0, 255); // 붉은색 배경
 
             }
             else {
@@ -25,22 +25,19 @@ bool Game::init(const char* title, int xpos, int ypos, int height, int width, in
     }
 
 
-    if (!TheTextureManager::Instance()->load("Assets/animate-alpha.png", "animate", m_pRenderer))
+ 
+    
+    if (!TheTextureManager::Instance()->loadkey("assets/player4.dib", "player", m_pRenderer))
     {
         return false;
     }
-   
-    if (!TheTextureManager::Instance()->load("assets/pngegg.png", "pngegg", m_pRenderer))
-    {
-        return false;
-    }
-
-    if (!TheTextureManager::Instance()->load("assets/player_1.png", "player_1", m_pRenderer))
+    if (!TheTextureManager::Instance()->loadkey("assets/player5.dib", "player_1", m_pRenderer))
     {
         return false;
     }
 
-
+    srand(time(NULL));
+    randpuzzle();
 
     m_bRunning = true;
     m_turn = false;
@@ -51,12 +48,12 @@ bool Game::init(const char* title, int xpos, int ypos, int height, int width, in
 
 void Game::update()
 {
-    m_currentFrame = ((SDL_GetTicks() / 100) % 6);
-    m_currentFrame_1 = ((SDL_GetTicks() / 100) % 8);
+    m_currentFrame_2 = ((SDL_GetTicks() / 100) % 5);
+    keyPad();
 
     
-    m_currentFrame_2 = ((SDL_GetTicks() / 100) % 5);
-    if (m_currentFrame_2 == 4 && m_turn)
+    
+    /*if (m_currentFrame_2 == 4 && m_turn)
     {
         m_turn = false;
         m_currentRow_2++;
@@ -68,20 +65,26 @@ void Game::update()
     else if (m_currentFrame_2 == 0)
     {
         m_turn = true;
-    }
+    }*/
+    SDL_Delay(10);
 }
 
 void Game::render()
 {
     SDL_RenderClear(m_pRenderer);
 
-    TheTextureManager::Instance()->draw("animate", 0, 0, 128, 82, m_pRenderer);
+    TheTextureManager::Instance()->drawFrame("player_1", Puzzle_X[Puzzle_i[0]], Puzzle_y[Puzzle_i[0]], 183, 183, m_currentRow_2 * 3 + 0, m_currentFrame_2 * 3 + 0, m_pRenderer); // 0,0
+    TheTextureManager::Instance()->drawFrame("player_1", Puzzle_X[Puzzle_i[1]], Puzzle_y[Puzzle_i[1]], 183, 183, m_currentRow_2 * 3 + 0, m_currentFrame_2 * 3 + 1, m_pRenderer); // 0,1
+    TheTextureManager::Instance()->drawFrame("player_1", Puzzle_X[Puzzle_i[2]], Puzzle_y[Puzzle_i[2]], 183, 183, m_currentRow_2 * 3 + 0, m_currentFrame_2 * 3 + 2, m_pRenderer); // 0,2
 
-    TheTextureManager::Instance()->drawFrame("animate", 100, 100, 128, 82, 0, m_currentFrame, m_pRenderer);
+    TheTextureManager::Instance()->drawFrame("player_1", Puzzle_X[Puzzle_i[3]], Puzzle_y[Puzzle_i[3]], 183, 183, m_currentRow_2 * 3 + 1, m_currentFrame_2 * 3 + 0, m_pRenderer); // 1,0
+    TheTextureManager::Instance()->drawFrame("player_1", Puzzle_X[Puzzle_i[4]], Puzzle_y[Puzzle_i[4]], 183, 183, m_currentRow_2 * 3 + 1, m_currentFrame_2 * 3 + 1, m_pRenderer); // 1,1
+    TheTextureManager::Instance()->drawFrame("player_1", Puzzle_X[Puzzle_i[5]], Puzzle_y[Puzzle_i[5]], 183, 183, m_currentRow_2 * 3 + 1, m_currentFrame_2 * 3 + 2, m_pRenderer); // 1,2
 
-    TheTextureManager::Instance()->drawFrame("pngegg", 200, 200, 67, 72, 0, m_currentFrame_1, m_pRenderer);
+    TheTextureManager::Instance()->drawFrame("player_1", Puzzle_X[Puzzle_i[6]], Puzzle_y[Puzzle_i[6]], 183, 183, m_currentRow_2 * 3 + 2, m_currentFrame_2 * 3 + 0, m_pRenderer); // 2,0
+    TheTextureManager::Instance()->drawFrame("player_1", Puzzle_X[Puzzle_i[7]], Puzzle_y[Puzzle_i[7]], 183, 183, m_currentRow_2 * 3 + 2, m_currentFrame_2 * 3 + 1, m_pRenderer); // 2,1
 
-    TheTextureManager::Instance()->drawFrame("player_1", 300, 300, 50, 50, m_currentRow_2, m_currentFrame_2, m_pRenderer);
+    TheTextureManager::Instance()->drawFrame("player", move_x, move_y, 50, 50, m_currentRow_2, m_currentFrame_2, m_pRenderer);
 
     SDL_RenderPresent(m_pRenderer);
 }
@@ -115,3 +118,77 @@ void Game::clean()
     SDL_Quit();
 }
 
+void Game::randpuzzle() 
+{
+    int tmp;
+    int count = 0;
+    int isSame = 0;
+    while (count < 9) 
+    {
+        isSame = 0;
+        tmp = rand() % 9;
+
+        for (int i = 0; i < count; i++) { //중복검사
+            if (tmp == Puzzle_i[i]) { //중복이 있을때
+                isSame = 1;
+                break;
+            }
+        }
+        if (isSame == 0) { //중복없음
+            Puzzle_i[count] = tmp;
+            count++;
+        }
+    }
+}
+
+void Game::keyPad()
+{
+    if (currentKeyStates[SDL_SCANCODE_LEFT])
+    {
+        if (move_x <= 0)
+        {
+            move_x -= 0;
+        }
+        else
+        {
+            move_x -= 4;
+        }
+        m_currentRow_2 = 0;
+    }
+    if (currentKeyStates[SDL_SCANCODE_RIGHT])
+    {
+        if (move_x >= 590)
+        {
+            move_x += 0;
+        }
+        else
+        {
+            move_x += 4;
+        }
+        m_currentRow_2 = 1;
+    }
+    if (currentKeyStates[SDL_SCANCODE_DOWN])
+    {
+        if (move_y >= 590)
+        {
+            move_y += 0;
+        }
+        else
+        {
+            move_y += 4;
+        }
+        m_currentRow_2 = 3;
+    }
+    if (currentKeyStates[SDL_SCANCODE_UP])
+    {
+        if (move_y <= 0)
+        {
+            move_y += 0;
+        }
+        else
+        {
+            move_y -= 4;
+        }
+        m_currentRow_2 = 2;
+    }
+}
