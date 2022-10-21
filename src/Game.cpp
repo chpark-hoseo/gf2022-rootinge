@@ -51,21 +51,6 @@ void Game::update()
     m_currentFrame_2 = ((SDL_GetTicks() / 100) % 5);
     keyPad();
 
-    
-    
-    /*if (m_currentFrame_2 == 4 && m_turn)
-    {
-        m_turn = false;
-        m_currentRow_2++;
-        if (m_currentRow_2 == 4)
-        {
-            m_currentRow_2 = 0;
-        }
-    }
-    else if (m_currentFrame_2 == 0)
-    {
-        m_turn = true;
-    }*/
     SDL_Delay(10);
 }
 
@@ -73,16 +58,16 @@ void Game::render()
 {
     SDL_RenderClear(m_pRenderer);
 
-    TheTextureManager::Instance()->drawFrame("player_1", Puzzle_X[Puzzle_i[0]], Puzzle_y[Puzzle_i[0]], 183, 183, m_currentRow_2 * 3 + 0, m_currentFrame_2 * 3 + 0, m_pRenderer); // 0,0
-    TheTextureManager::Instance()->drawFrame("player_1", Puzzle_X[Puzzle_i[1]], Puzzle_y[Puzzle_i[1]], 183, 183, m_currentRow_2 * 3 + 0, m_currentFrame_2 * 3 + 1, m_pRenderer); // 0,1
-    TheTextureManager::Instance()->drawFrame("player_1", Puzzle_X[Puzzle_i[2]], Puzzle_y[Puzzle_i[2]], 183, 183, m_currentRow_2 * 3 + 0, m_currentFrame_2 * 3 + 2, m_pRenderer); // 0,2
+    TheTextureManager::Instance()->drawFrame("player_1", puzzle_X[puzzle_i[0]], puzzle_y[puzzle_i[0]], 183, 183, m_currentRow_2 * 3 + 0, m_currentFrame_2 * 3 + 0, m_pRenderer); // 0,0
+    TheTextureManager::Instance()->drawFrame("player_1", puzzle_X[puzzle_i[1]], puzzle_y[puzzle_i[1]], 183, 183, m_currentRow_2 * 3 + 0, m_currentFrame_2 * 3 + 1, m_pRenderer); // 0,1
+    TheTextureManager::Instance()->drawFrame("player_1", puzzle_X[puzzle_i[2]], puzzle_y[puzzle_i[2]], 183, 183, m_currentRow_2 * 3 + 0, m_currentFrame_2 * 3 + 2, m_pRenderer); // 0,2
 
-    TheTextureManager::Instance()->drawFrame("player_1", Puzzle_X[Puzzle_i[3]], Puzzle_y[Puzzle_i[3]], 183, 183, m_currentRow_2 * 3 + 1, m_currentFrame_2 * 3 + 0, m_pRenderer); // 1,0
-    TheTextureManager::Instance()->drawFrame("player_1", Puzzle_X[Puzzle_i[4]], Puzzle_y[Puzzle_i[4]], 183, 183, m_currentRow_2 * 3 + 1, m_currentFrame_2 * 3 + 1, m_pRenderer); // 1,1
-    TheTextureManager::Instance()->drawFrame("player_1", Puzzle_X[Puzzle_i[5]], Puzzle_y[Puzzle_i[5]], 183, 183, m_currentRow_2 * 3 + 1, m_currentFrame_2 * 3 + 2, m_pRenderer); // 1,2
+    TheTextureManager::Instance()->drawFrame("player_1", puzzle_X[puzzle_i[3]], puzzle_y[puzzle_i[3]], 183, 183, m_currentRow_2 * 3 + 1, m_currentFrame_2 * 3 + 0, m_pRenderer); // 1,0
+    TheTextureManager::Instance()->drawFrame("player_1", puzzle_X[puzzle_i[4]], puzzle_y[puzzle_i[4]], 183, 183, m_currentRow_2 * 3 + 1, m_currentFrame_2 * 3 + 1, m_pRenderer); // 1,1
+    TheTextureManager::Instance()->drawFrame("player_1", puzzle_X[puzzle_i[5]], puzzle_y[puzzle_i[5]], 183, 183, m_currentRow_2 * 3 + 1, m_currentFrame_2 * 3 + 2, m_pRenderer); // 1,2
 
-    TheTextureManager::Instance()->drawFrame("player_1", Puzzle_X[Puzzle_i[6]], Puzzle_y[Puzzle_i[6]], 183, 183, m_currentRow_2 * 3 + 2, m_currentFrame_2 * 3 + 0, m_pRenderer); // 2,0
-    TheTextureManager::Instance()->drawFrame("player_1", Puzzle_X[Puzzle_i[7]], Puzzle_y[Puzzle_i[7]], 183, 183, m_currentRow_2 * 3 + 2, m_currentFrame_2 * 3 + 1, m_pRenderer); // 2,1
+    TheTextureManager::Instance()->drawFrame("player_1", puzzle_X[puzzle_i[6]], puzzle_y[puzzle_i[6]], 183, 183, m_currentRow_2 * 3 + 2, m_currentFrame_2 * 3 + 0, m_pRenderer); // 2,0
+    TheTextureManager::Instance()->drawFrame("player_1", puzzle_X[puzzle_i[7]], puzzle_y[puzzle_i[7]], 183, 183, m_currentRow_2 * 3 + 2, m_currentFrame_2 * 3 + 1, m_pRenderer); // 2,1
 
     TheTextureManager::Instance()->drawFrame("player", move_x, move_y, 50, 50, m_currentRow_2, m_currentFrame_2, m_pRenderer);
 
@@ -129,13 +114,13 @@ void Game::randpuzzle()
         tmp = rand() % 9;
 
         for (int i = 0; i < count; i++) { //중복검사
-            if (tmp == Puzzle_i[i]) { //중복이 있을때
+            if (tmp == puzzle_i[i]) { //중복이 있을때
                 isSame = 1;
                 break;
             }
         }
         if (isSame == 0) { //중복없음
-            Puzzle_i[count] = tmp;
+            puzzle_i[count] = tmp;
             count++;
         }
     }
@@ -190,5 +175,31 @@ void Game::keyPad()
             move_y -= 4;
         }
         m_currentRow_2 = 2;
+    }
+
+    blockswitch();
+}
+
+void Game::blockswitch()
+{
+    if (puzzle_i[8] == 8)
+    {
+        if ((233 <= move_x) && (416 >= move_x) && (416 <= move_y) && (599 >= move_y))
+        {
+            if (currentKeyStates[SDL_SCANCODE_SPACE])
+            {
+                for (int i = 0; i < 9; i++)
+                {
+                    if (puzzle_i[i] == 7)
+                    {
+                        m_change = i;
+                        break;
+                    }
+                }
+
+                puzzle_i[8] = 7;
+                puzzle_i[m_change] = 8;
+            }
+        }
     }
 }

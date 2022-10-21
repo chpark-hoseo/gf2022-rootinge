@@ -21,6 +21,7 @@ public:
 	void clean();
 	void randpuzzle();
 	void keyPad();
+	void blockswitch();
 	const Uint8* currentKeyStates = SDL_GetKeyboardState(NULL);
 
 private: 
@@ -29,9 +30,9 @@ private:
 	bool m_bRunning;
 	bool m_turn;
 
-	int Puzzle_X[9] = { 50, 233, 416, 50, 233, 416, 50, 233, 416};
-	int Puzzle_y[9] = { 50, 50, 50, 233, 233, 233, 416, 416, 416};
-	int Puzzle_i[9] = {0,1,2,3,4,5,6,7,8};
+	int puzzle_X[9] = { 50, 233, 416, 50, 233, 416, 50, 233, 416};
+	int puzzle_y[9] = { 50, 50, 50, 233, 233, 233, 416, 416, 416};
+	int puzzle_i[9] = {0,1,2,3,4,5,6,7,8};
 
 	int move_x = 0;
 	int move_y = 0;
@@ -40,7 +41,9 @@ private:
 	int m_currentFrame_1;
 	int m_currentFrame_2;
 
-	int m_currentRow_2 = 0;
+	int m_change;
+
+	int m_currentRow_2 = 1;
 };
 
 #endif /* defined(__Game__) */
