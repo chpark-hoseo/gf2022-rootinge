@@ -187,41 +187,13 @@ void Game::keyPad()
 
 void Game::blockswitch()
 {
-    if (puzzle_i[8] == 0)
+    for (int i = 0; i < 9; i++)
     {
-        switchcode(0);
-    }
-    else if (puzzle_i[8] == 1)
-    {
-        switchcode(1);
-    }
-    else if (puzzle_i[8] == 2)
-    {
-        switchcode(2);
-    }
-    else if (puzzle_i[8] == 3)
-    {
-        switchcode(3);
-    }
-    else if (puzzle_i[8] == 4)
-    {
-        switchcode(4);
-    }
-    else if (puzzle_i[8] == 5)
-    {
-        switchcode(5);
-    }
-    else if (puzzle_i[8] == 6)
-    {
-        switchcode(6);
-    }
-    else if (puzzle_i[8] == 7)
-    {
-        switchcode(7);
-    }
-    else if (puzzle_i[8] == 8)
-    {
-        switchcode(8);
+        if (puzzle_i[8] == i)
+        {
+            switchcode(i);
+            break;
+        }
     }
 }
 
