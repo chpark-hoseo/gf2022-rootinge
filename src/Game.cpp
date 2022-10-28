@@ -29,17 +29,9 @@ bool Game::init(const char* title, int xpos, int ypos, int height, int width, in
     {
         return false;
     }
-   
-    if (!TheTextureManager::Instance()->load("assets/pngegg.png", "pngegg", m_pRenderer))
-    {
-        return false;
-    }
 
-    if (!TheTextureManager::Instance()->load("assets/player_1.png", "player_1", m_pRenderer))
-    {
-        return false;
-    }
-
+    m_go.load(100, 100, 128, 82, "animate");
+    m_player.load(300, 300, 128, 82, "animate");
 
 
     m_bRunning = true;
@@ -51,37 +43,16 @@ bool Game::init(const char* title, int xpos, int ypos, int height, int width, in
 
 void Game::update()
 {
-    m_currentFrame = ((SDL_GetTicks() / 100) % 6);
-    m_currentFrame_1 = ((SDL_GetTicks() / 100) % 8);
-
-    
-    m_currentFrame_2 = ((SDL_GetTicks() / 100) % 5);
-    if (m_currentFrame_2 == 4 && m_turn)
-    {
-        m_turn = false;
-        m_currentRow_2++;
-        if (m_currentRow_2 == 4)
-        {
-            m_currentRow_2 = 0;
-        }
-    }
-    else if (m_currentFrame_2 == 0)
-    {
-        m_turn = true;
-    }
+    m_go.update();
+    m_player.update();
 }
 
 void Game::render()
 {
     SDL_RenderClear(m_pRenderer);
 
-    TheTextureManager::Instance()->draw("animate", 0, 0, 128, 82, m_pRenderer);
-
-    TheTextureManager::Instance()->drawFrame("animate", 100, 100, 128, 82, 0, m_currentFrame, m_pRenderer);
-
-    TheTextureManager::Instance()->drawFrame("pngegg", 200, 200, 67, 72, 0, m_currentFrame_1, m_pRenderer);
-
-    TheTextureManager::Instance()->drawFrame("player_1", 300, 300, 50, 50, m_currentRow_2, m_currentFrame_2, m_pRenderer);
+    m_go.draw(m_pRenderer);
+    m_player.draw(m_pRenderer);
 
     SDL_RenderPresent(m_pRenderer);
 }

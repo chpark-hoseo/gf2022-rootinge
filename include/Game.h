@@ -2,7 +2,8 @@
 #define __Game__
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_image.h>
-#include "TextureManager.h"
+#include "GameObject.h"
+#include "Player.h"
 
 class Game
 {
@@ -23,7 +24,8 @@ private:
 	bool m_bRunning;
 	bool m_turn;
 
-
+	GameObject m_go;
+	Player m_player;
 
 
 	int m_currentFrame;

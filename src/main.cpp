@@ -7,12 +7,14 @@ int main(int argc, char* argv[])
 
     g_game->init("Game Class", 100, 100, 640, 480, 0);
 
-    while (g_game->running())
-    { 
+
+    while (g_game->running()) {
         g_game->handleEvents();
         g_game->update();
         g_game->render();
+        SDL_Delay(10); // add the delay
     }
+
 
     g_game->clean();
 
