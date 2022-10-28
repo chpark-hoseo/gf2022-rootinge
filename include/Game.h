@@ -4,6 +4,7 @@
 #include <SDL2/SDL_image.h>
 #include "GameObject.h"
 #include "Player.h"
+#include "Monster.h"
 
 class Game
 {
@@ -26,6 +27,8 @@ private:
 
 	GameObject m_go;
 	Player m_player;
+	Monster m_monster;
+	Monster m_monster_1;
 
 
 	int m_currentFrame;
