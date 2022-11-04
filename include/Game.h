@@ -2,6 +2,7 @@
 #define __Game__
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_image.h>
+#include <vector>
 #include "GameObject.h"
 #include "Player.h"
 #include "Monster.h"
@@ -25,11 +26,12 @@ private:
 	bool m_bRunning;
 	bool m_turn;
 
-	GameObject m_go;
+	/*GameObject m_go;
 	Player m_player;
 	Monster m_monster;
-	Monster m_monster_1;
+	Monster m_monster_1;*/
 
+	std::vector<GameObject*> m_gameObjects;
 
 	int m_currentFrame;
 	int m_currentFrame_1;
