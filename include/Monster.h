@@ -4,8 +4,13 @@
 class Monster : public GameObject
 {
 public:
-    void update(int moveSpeed);
+    Monster(int movespeed)
+    {
+        m_move = movespeed;
+    }
+    void update();
 
 private:
-    bool m_turn;
+    int m_move;
+    bool m_turn = false;
 };

@@ -1,6 +1,6 @@
 #include "Monster.h"
 
-void Monster::update(int moveSpeed)
+void Monster::update()
 {
     m_currentFrame = ((SDL_GetTicks() / 100) % 6);
     if (m_x < 0)
@@ -9,8 +9,8 @@ void Monster::update(int moveSpeed)
         m_turn = true;
 
     if (m_turn)
-        m_x -= moveSpeed;
+        m_x -= m_move;
     else
-        m_x += moveSpeed;
+        m_x += m_move;
     
 }

@@ -2,7 +2,9 @@
 #define __Game__
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_image.h>
+#include <algorithm>
 #include <vector>
+#include <functional>
 #include "GameObject.h"
 #include "Player.h"
 #include "Monster.h"
