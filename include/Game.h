@@ -38,10 +38,6 @@ private:
 	bool m_bRunning;
 	bool m_turn;
 
-	/*GameObject m_go;
-	Player m_player;
-	Monster m_monster;
-	Monster m_monster_1;*/
 
 	std::vector<GameObject*> m_gameObjects;
 
