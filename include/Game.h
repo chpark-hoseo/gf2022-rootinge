@@ -15,12 +15,22 @@ public:
 	Game() { }
 	~Game() { }
 
+	static Game* Instance() {
+		if (s_pInstance == 0) {
+			s_pInstance = new Game();
+			return s_pInstance;
+		}
+		return s_pInstance;
+	}
+	SDL_Renderer* getRenderer() const { return m_pRenderer; }
+
 	bool init(const char* title, int xpos, int ypos, int height, int width, int flags);
 	void render();
 	void update();
 	bool running();
 	void handleEvents();
 	void clean();
+
 
 private: 
 	SDL_Window* m_pWindow;
@@ -40,6 +50,10 @@ private:
 	int m_currentFrame_2;
 
 	int m_currentRow_2 = 0;
+
+	static Game* s_pInstance; // 정적 멤버변수 
 };
+
+typedef Game TheGame;
 
 #endif /* defined(__Game__) */
