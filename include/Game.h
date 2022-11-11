@@ -7,7 +7,7 @@
 #include <functional>
 #include "GameObject.h"
 #include "Player.h"
-#include "Monster.h"
+#include "Enemy.h"
 
 class Game
 {
