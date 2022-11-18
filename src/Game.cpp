@@ -73,23 +73,12 @@ bool Game::running()
 
 void Game::handleEvents()
 {
-    SDL_Event event;
-    while (SDL_PollEvent(&event)) //이벤트가 진행되는동안 확인하기 위해?
-    {
-        switch (event.type)
-        {
-        case SDL_QUIT:
-            m_bRunning = false;
-            break;
-        default:
-            break;
-        }
-    }
+    TheInputHandler::Instance()->update();
 }
 
 void Game::clean()
 {
-
+    TheInputHandler::Instance()->clean();
     SDL_DestroyWindow(m_pWindow);
     SDL_DestroyRenderer(m_pRenderer);
     SDL_Quit();
