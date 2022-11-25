@@ -27,6 +27,8 @@ public:
 	const Uint8* currentKeyStates = SDL_GetKeyboardState(NULL);
 
 private: 
+
+
 	SDL_Window* m_pWindow;
 	SDL_Renderer* m_pRenderer;
 	bool m_bRunning;
