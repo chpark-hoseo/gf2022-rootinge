@@ -22,7 +22,8 @@ void Enemy::handleInput()
         printf("shoot \n");
     }
     Vector2D* vec = TheInputHandler::Instance()->getMousePosition();
-    m_velocity = (*vec - m_position) / 100;
+    
+    m_velocity = (*vec - m_position - Vector2D(64, 41)) / 100;
 
 }
 
