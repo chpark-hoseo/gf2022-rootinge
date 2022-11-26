@@ -5,7 +5,8 @@
 #include "TextureManager.h"
 #include <time.h>
 #include <stdio.h>
-
+#include "GameObject.h"
+#include "Player.h"
 
 class Game
 {
@@ -28,6 +29,9 @@ public:
 
 private: 
 
+
+	GameObject m_go;
+	Player m_player;
 
 	SDL_Window* m_pWindow;
 	SDL_Renderer* m_pRenderer;

@@ -1,6 +1,8 @@
 #pragma once
 #include<iostream>
 #include <SDL2/SDL.h>
+#include "GameObject.h"
+#include "Player.h"
 
 class GameObject {
 
@@ -14,6 +16,9 @@ public:
 
 protected:
 	std::string m_textureID;
+
+	GameObject m_go;
+	Player m_player;
 
 	int m_x;
 	int m_y;
