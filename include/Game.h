@@ -32,8 +32,7 @@ private:
 
 	std::vector<GameObject*> m_gameObjects;
 
-	GameObject m_go;
-	Player m_player;
+	
 
 	SDL_Window* m_pWindow;
 	SDL_Renderer* m_pRenderer;

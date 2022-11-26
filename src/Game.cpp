@@ -24,8 +24,7 @@ bool Game::init(const char* title, int xpos, int ypos, int height, int width, in
         return false; // SDL 초기화 실패
     }
 
-    m_go.load(100, 100, 128, 82, "animate");
-    m_player.load(300, 300, 128, 82, "animate");
+   
  
     
     if (!TheTextureManager::Instance()->loadkey("assets/player4.dib", "player", m_pRenderer))
@@ -36,6 +35,16 @@ bool Game::init(const char* title, int xpos, int ypos, int height, int width, in
     {
         return false;
     }
+
+    GameObject* m_go = new GameObject();
+    GameObject* m_player = new Player();
+
+    m_go->load(100, 100, 128, 82, "animate");
+    m_player->load(300, 300, 128, 82, "animate");
+
+
+    m_gameObjects.push_back(m_go);
+    m_gameObjects.push_back(m_player);
 
     srand(time(NULL));
     
@@ -50,6 +59,12 @@ bool Game::init(const char* title, int xpos, int ypos, int height, int width, in
 
 void Game::update()
 {
+
+    for (int i = 0; i < m_gameObjects.size(); i++)
+    {
+        m_gameObjects[i]->update();
+    }
+
     m_currentFrame_2 = ((SDL_GetTicks() / 100) % 5);
     keyPad();
 
@@ -59,6 +74,11 @@ void Game::update()
 void Game::render()
 {
     SDL_RenderClear(m_pRenderer);
+
+    for (int i = 0; i < m_gameObjects.size(); i++)
+    {
+        m_gameObjects[i]->draw(m_pRenderer);
+    }
 
     TheTextureManager::Instance()->drawFrame("player_1", puzzle_x[puzzle_i[0]], puzzle_y[puzzle_i[0]], 183, 183, m_currentRow_2 * 3 + 0, m_currentFrame_2 * 3 + 0, m_pRenderer); // 0,0
     TheTextureManager::Instance()->drawFrame("player_1", puzzle_x[puzzle_i[1]], puzzle_y[puzzle_i[1]], 183, 183, m_currentRow_2 * 3 + 0, m_currentFrame_2 * 3 + 1, m_pRenderer); // 0,1
