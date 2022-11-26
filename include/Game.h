@@ -5,6 +5,7 @@
 #include "TextureManager.h"
 #include <time.h>
 #include <stdio.h>
+#include <vector>
 #include "GameObject.h"
 #include "Player.h"
 
@@ -29,6 +30,7 @@ public:
 
 private: 
 
+	std::vector<GameObject*> m_gameObjects;
 
 	GameObject m_go;
 	Player m_player;
