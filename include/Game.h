@@ -21,6 +21,16 @@ public:
 	bool running();
 	void handleEvents();
 	void clean();
+
+	static Game* Instance() {
+		if (s_pInstance == 0) {
+			s_pInstance = new Game();
+			return s_pInstance;
+		}
+		return s_pInstance;
+	}
+	SDL_Renderer* getRenderer() const { return m_pRenderer; }
+
 	void randpuzzle();
 	void keyPad();
 	void blockswitch();
@@ -29,7 +39,7 @@ public:
 	const Uint8* currentKeyStates = SDL_GetKeyboardState(NULL);
 
 private: 
-
+	static Game* s_pInstance;
 	std::vector<GameObject*> m_gameObjects;
 
 	
@@ -54,5 +64,5 @@ private:
 
 	int m_currentRow_2 = 1;
 };
-
+typedef Game TheGame;
 #endif /* defined(__Game__) */
