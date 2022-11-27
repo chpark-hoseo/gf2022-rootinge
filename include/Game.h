@@ -34,7 +34,7 @@ public:
 	SDL_Renderer* getRenderer() const { return m_pRenderer; }
 
 	void randpuzzle();
-	void keyPad();
+	void keyPad(){}
 	void blockswitch();
 	void switchcode(int innum);
 

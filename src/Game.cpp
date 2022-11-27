@@ -39,7 +39,8 @@ bool Game::init(const char* title, int xpos, int ypos, int height, int width, in
     }
 
 
-    m_gameObjects.push_back(new Player(new LoaderParams(100, 100, 128, 82, "animate")));
+    m_gameObjects.push_back(new Player(new LoaderParams(0, 0, 50, 50, "player")));
+
 
 
     srand(time(NULL));
@@ -71,9 +72,7 @@ void Game::render()
 {
     SDL_RenderClear(m_pRenderer);
 
-    for (int i = 0; i != m_gameObjects.size(); i++) {
-        m_gameObjects[i]->draw();
-    }
+    
 
     TheTextureManager::Instance()->drawFrame("player_1", puzzle_x[puzzle_i[0]], puzzle_y[puzzle_i[0]], 183, 183, m_currentRow_2 * 3 + 0, m_currentFrame_2 * 3 + 0, m_pRenderer); // 0,0
     TheTextureManager::Instance()->drawFrame("player_1", puzzle_x[puzzle_i[1]], puzzle_y[puzzle_i[1]], 183, 183, m_currentRow_2 * 3 + 0, m_currentFrame_2 * 3 + 1, m_pRenderer); // 0,1
@@ -85,8 +84,11 @@ void Game::render()
 
     TheTextureManager::Instance()->drawFrame("player_1", puzzle_x[puzzle_i[6]], puzzle_y[puzzle_i[6]], 183, 183, m_currentRow_2 * 3 + 2, m_currentFrame_2 * 3 + 0, m_pRenderer); // 2,0
     TheTextureManager::Instance()->drawFrame("player_1", puzzle_x[puzzle_i[7]], puzzle_y[puzzle_i[7]], 183, 183, m_currentRow_2 * 3 + 2, m_currentFrame_2 * 3 + 1, m_pRenderer); // 2,1
-
-    TheTextureManager::Instance()->drawFrame("player", move_x, move_y, 50, 50, m_currentRow_2, m_currentFrame_2, m_pRenderer);
+    
+    for (int i = 0; i != m_gameObjects.size(); i++) {
+        m_gameObjects[i]->draw();
+    }
+    //TheTextureManager::Instance()->drawFrame("player", move_x, move_y, 50, 50, m_currentRow_2, m_currentFrame_2, m_pRenderer);
 
     SDL_RenderPresent(m_pRenderer);
 }
@@ -133,63 +135,63 @@ void Game::randpuzzle()
     }
 }
 
-void Game::keyPad()
-{
-    if (currentKeyStates[SDL_SCANCODE_LEFT])
-    {
-        if (move_x <= 0)
-        {
-            move_x -= 0;
-        }
-        else
-        {
-            move_x -= 4;
-        }
-        m_currentRow_2 = 0;
-    }
-    if (currentKeyStates[SDL_SCANCODE_RIGHT])
-    {
-        if (move_x >= 590)
-        {
-            move_x += 0;
-        }
-        else
-        {
-            move_x += 4;
-        }
-        m_currentRow_2 = 1;
-    }
-    if (currentKeyStates[SDL_SCANCODE_DOWN])
-    {
-        if (move_y >= 590)
-        {
-            move_y += 0;
-        }
-        else
-        {
-            move_y += 4;
-        }
-        m_currentRow_2 = 3;
-    }
-    if (currentKeyStates[SDL_SCANCODE_UP])
-    {
-        if (move_y <= 0)
-        {
-            move_y += 0;
-        }
-        else
-        {
-            move_y -= 4;
-        }
-        m_currentRow_2 = 2;
-    }
-    if (currentKeyStates[SDL_SCANCODE_SPACE])
-    {
-
-        blockswitch();
-    }
-    
-}
+//void Game::keyPad()
+//{
+//    if (currentKeyStates[SDL_SCANCODE_LEFT])
+//    {
+//        if (move_x <= 0)
+//        {
+//            move_x -= 0;
+//        }
+//        else
+//        {
+//            move_x -= 4;
+//        }
+//        m_currentRow_2 = 0;
+//    }
+//    if (currentKeyStates[SDL_SCANCODE_RIGHT])
+//    {
+//        if (move_x >= 590)
+//        {
+//            move_x += 0;
+//        }
+//        else
+//        {
+//            move_x += 4;
+//        }
+//        m_currentRow_2 = 1;
+//    }
+//    if (currentKeyStates[SDL_SCANCODE_DOWN])
+//    {
+//        if (move_y >= 590)
+//        {
+//            move_y += 0;
+//        }
+//        else
+//        {
+//            move_y += 4;
+//        }
+//        m_currentRow_2 = 3;
+//    }
+//    if (currentKeyStates[SDL_SCANCODE_UP])
+//    {
+//        if (move_y <= 0)
+//        {
+//            move_y += 0;
+//        }
+//        else
+//        {
+//            move_y -= 4;
+//        }
+//        m_currentRow_2 = 2;
+//    }
+//    if (currentKeyStates[SDL_SCANCODE_SPACE])
+//    {
+//
+//        blockswitch();
+//    }
+//    
+//}
 
 void Game::blockswitch()
 {
