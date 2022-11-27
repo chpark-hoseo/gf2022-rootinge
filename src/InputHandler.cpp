@@ -40,6 +40,19 @@ void InputHandler::update()
     }
 }
 
+bool InputHandler::isKeyDown(SDL_Scancode key)
+{
+    if (m_keystates != 0) {
+        if (m_keystates[key] == 1) {
+            return true;
+        }
+        else {
+            return false;
+        }
+    }
+    return false;
+}
+
 void InputHandler::onMouseMove(SDL_Event event)
 {
     m_mousePosition->setX(event.motion.x);
@@ -80,4 +93,14 @@ void InputHandler::onKeyDown()
 void InputHandler::onKeyUp()
 {
     m_keystates = SDL_GetKeyboardState(0);
+}
+
+bool InputHandler::getMouseButtonState(int buttonNumber)
+{
+    return m_mouseButtonStates[buttonNumber];
+}
+
+Vector2D* InputHandler::getMousePosition()
+{
+    return m_mousePosition;
 }
