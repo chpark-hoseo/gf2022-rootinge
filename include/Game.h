@@ -22,6 +22,8 @@ public:
 	void handleEvents();
 	void clean();
 
+	void quit() { m_bRunning = false; }
+
 	static Game* Instance() {
 		if (s_pInstance == 0) {
 			s_pInstance = new Game();
@@ -35,6 +37,7 @@ public:
 	void keyPad();
 	void blockswitch();
 	void switchcode(int innum);
+
 
 	const Uint8* currentKeyStates = SDL_GetKeyboardState(NULL);
 
