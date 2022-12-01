@@ -2,12 +2,12 @@
 #define __Game__
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_image.h>
-#include "TextureManager.h"
 #include <time.h>
 #include <stdio.h>
 #include <vector>
-#include "GameObject.h"
+#include "TextureManager.h"
 #include "Player.h"
+#include "GameObject.h"
 
 class Game
 {

@@ -117,21 +117,47 @@ void Game::randpuzzle()
     int tmp;
     int count = 0;
     int isSame = 0;
-    while (count < 9) 
+    int inversion = 0;
+    while (1)
     {
-        isSame = 0;
-        tmp = rand() % 9;
+        while (count < 9)
+        {
+            isSame = 0;
+            tmp = rand() % 9;
+            for (int i = 0; i < count; i++) { //중복검사
+                if (tmp == puzzle_i[i]) { //중복이 있을때
+                    isSame = 1;
+                    break;
+                }
+            }
+            if (isSame == 0) { //중복없음
+                puzzle_i[count] = tmp;
+                count++;
+            }
 
-        for (int i = 0; i < count; i++) { //중복검사
-            if (tmp == puzzle_i[i]) { //중복이 있을때
-                isSame = 1;
-                break;
+        }
+
+    for (int i = 0; i < 8; i++)
+    {
+        if (puzzle_i[i] == 8)
+        {
+            puzzle_i[i] = puzzle_i[8];
+            puzzle_i[8] = 8;
+            break;
+        }
+    }
+        for (int i = 1; i < 9; i++)
+        {
+            for (int j = i + 1; j < 9; j++)
+            {
+                if (puzzle_i[i] > puzzle_i[j])
+                    inversion++;
             }
         }
-        if (isSame == 0) { //중복없음
-            puzzle_i[count] = tmp;
-            count++;
-        }
+        printf("%d\n", inversion);
+        if (inversion % 2 == 0)
+            break;
+
     }
 }
 
@@ -195,6 +221,7 @@ void Game::randpuzzle()
 
 void Game::blockswitch()
 {
+    
     for (int i = 0; i < 9; i++)
     {
         if (puzzle_i[8] == i)
@@ -209,12 +236,12 @@ void Game::blockswitch()
 void Game::switchcode(int innum)
 {
     int change = 0;
-
+    
     // 위
     if (innum - 3 >= 0)
     {
-        if ((puzzle_x[puzzle_i[8]] < move_x + 25) && (move_x + 25 < puzzle_x[puzzle_i[8]] + 183  )
-            && (puzzle_y[puzzle_i[8]] - 183 < move_y + 25) && (move_y + 25 < puzzle_y[puzzle_i[8]]))
+        if ((puzzle_x[puzzle_i[8]] < Player::Palyer_X + 25) && (Player::Palyer_X + 25 < puzzle_x[puzzle_i[8]] + 183  )
+            && (puzzle_y[puzzle_i[8]] - 183 < Player::Palyer_Y + 25) && (Player::Palyer_Y + 25 < puzzle_y[puzzle_i[8]]))
         {
             for (int i = 0; i < 9; i++)
             {
@@ -232,8 +259,8 @@ void Game::switchcode(int innum)
     // 왼쪽
     if ((innum - 1 >= 0) && (innum - 1 != 2) && (innum - 1 != 5))
     {
-        if ((puzzle_x[puzzle_i[8]] - 183 < move_x + 25) && (puzzle_x[puzzle_i[8]] > move_x + 25)
-            && (puzzle_y[puzzle_i[8]] < move_y + 25) && (puzzle_y[puzzle_i[8]] + 183 > move_y + 25))
+        if ((puzzle_x[puzzle_i[8]] - 183 < Player::Palyer_X + 25) && (puzzle_x[puzzle_i[8]] > Player::Palyer_X + 25)
+            && (puzzle_y[puzzle_i[8]] < Player::Palyer_Y + 25) && (puzzle_y[puzzle_i[8]] + 183 > Player::Palyer_Y + 25))
         {
             for (int i = 0; i < 9; i++)
             {
@@ -251,8 +278,8 @@ void Game::switchcode(int innum)
     // 오른쪽
     if ((innum + 1<= 8) && (innum + 1 != 3) && (innum + 1 != 6))
     {
-        if ((puzzle_x[puzzle_i[8]] + 183 < move_x + 25) && (puzzle_x[puzzle_i[8]] + 183 + 183 > move_x + 25)
-            && (puzzle_y[puzzle_i[8]] < move_y + 25) && (puzzle_y[puzzle_i[8]] + 183 > move_y + 25))
+        if ((puzzle_x[puzzle_i[8]] + 183 < Player::Palyer_X + 25) && (puzzle_x[puzzle_i[8]] + 183 + 183 > Player::Palyer_X + 25)
+            && (puzzle_y[puzzle_i[8]] < Player::Palyer_Y + 25) && (puzzle_y[puzzle_i[8]] + 183 > Player::Palyer_Y + 25))
         {
             for (int i = 0; i < 9; i++)
             {
@@ -270,8 +297,8 @@ void Game::switchcode(int innum)
     // 아래
     if (innum + 3 <= 8)
     {
-        if ((puzzle_x[puzzle_i[8]] < move_x + 25) && (move_x + 25 < puzzle_x[puzzle_i[8]] + 183)
-            && (puzzle_y[puzzle_i[8]] + 183 < move_y + 25) && (move_y + 25 < puzzle_y[puzzle_i[8]] + 183 + 183))
+        if ((puzzle_x[puzzle_i[8]] < Player::Palyer_X + 25) && (Player::Palyer_X + 25 < puzzle_x[puzzle_i[8]] + 183)
+            && (puzzle_y[puzzle_i[8]] + 183 < Player::Palyer_Y + 25) && (Player::Palyer_Y + 25 < puzzle_y[puzzle_i[8]] + 183 + 183))
         {
             for (int i = 0; i < 9; i++)
             {
@@ -286,4 +313,5 @@ void Game::switchcode(int innum)
             puzzle_i[change] = innum;
         }
     }
+
 }
