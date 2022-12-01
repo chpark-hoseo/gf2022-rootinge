@@ -142,7 +142,9 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="src\Clear.cpp" />
     <ClCompile Include="src\Game.cpp" />
+    <ClCompile Include="src\GameManager.cpp" />
     <ClCompile Include="src\InputHandler.cpp" />
     <ClCompile Include="src\main.cpp" />
     <ClCompile Include="src\Player.cpp" />
@@ -152,6 +154,7 @@
     <ClCompile Include="src\Vector2D.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="include\Clear.h" />
     <ClInclude Include="include\Game.h" />
     <ClInclude Include="include\GameObject.h" />
     <ClInclude Include="include\InputHandler.h" />
@@ -162,6 +165,7 @@
     <ClInclude Include="include\SDLGameObject.h" />
     <ClInclude Include="include\TextureManager.h" />
     <ClInclude Include="include\Vector2D.h" />
+    <ClInclude Include="include\GameManager.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

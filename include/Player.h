@@ -7,8 +7,8 @@ public:
     static int Palyer_X;
     static int Palyer_Y;
 
-    float getX() { return m_position.getX(); }
-    float getY() { return m_position.getY(); }
+    static int Player_currentFrame;
+    static int Player_currentRow;
 
     Player(const LoaderParams* pParams);
     virtual void draw();
