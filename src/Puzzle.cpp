@@ -28,6 +28,7 @@ void Puzzle::update()
     handleInput();
     m_currentFrame = Player::Player_currentFrame;
     m_currentRow = Player::Player_currentRow;
+    swutchpuzzle();
     gameClear();
 }
 
@@ -38,7 +39,7 @@ void Puzzle::clean()
 
 void Puzzle::handleInput()
 {
-    if (TheInputHandler::Instance()->getMouseButtonState(LEFT)) {
+    if (TheInputHandler::Instance()->getMouseButtonState(LEFT) && !clickpuzzle) {
         blockswitch();
     }
 }
@@ -170,9 +171,16 @@ void Puzzle::switchcode(int innum)
                     break;
                 }
             }
+            direction = 0;
+            movenum_1 = innum;
+            movenum_2 = change;
 
-            puzzle_i[8] = innum - 3;
-            puzzle_i[change] = innum;
+            if(!clickpuzzle)
+                save = puzzle_y[puzzle_i[movenum_2]];
+
+            clickpuzzle = true;
+           /* puzzle_i[8] = innum - 3;
+            puzzle_i[change] = innum;*/
         }
     }
     // 왼쪽
@@ -189,9 +197,16 @@ void Puzzle::switchcode(int innum)
                     break;
                 }
             }
+            direction = 1;
+            movenum_1 = innum;
+            movenum_2 = change;
 
-            puzzle_i[8] = innum - 1;
-            puzzle_i[change] = innum;
+            if (!clickpuzzle)
+                save = puzzle_x[puzzle_i[movenum_2]];
+
+            clickpuzzle = true;
+            /*puzzle_i[8] = innum - 1;
+            puzzle_i[change] = innum;*/
         }
     }
     // 오른쪽
@@ -208,9 +223,17 @@ void Puzzle::switchcode(int innum)
                     break;
                 }
             }
+            direction = 2;
+            movenum_1 = innum;
+            movenum_2 = change;
 
-            puzzle_i[8] = innum + 1;
-            puzzle_i[change] = innum;
+            if (!clickpuzzle)
+                save = puzzle_x[puzzle_i[movenum_2]];
+
+            clickpuzzle = true;
+
+            /*puzzle_i[8] = innum + 1;
+            puzzle_i[change] = innum;*/
         }
     }
     // 아래
@@ -227,12 +250,83 @@ void Puzzle::switchcode(int innum)
                     break;
                 }
             }
+            direction = 3;
+            movenum_1 = innum;
+            movenum_2 = change;
 
-            puzzle_i[8] = innum + 3;
-            puzzle_i[change] = innum;
+            if (!clickpuzzle)
+                save = puzzle_y[puzzle_i[movenum_2]];
+
+            clickpuzzle = true;
+
+            /*puzzle_i[8] = innum + 3;
+            puzzle_i[change] = innum;*/
         }
     }
 
+}
+
+void Puzzle::swutchpuzzle()
+{
+    
+    if (clickpuzzle)
+    {
+        switch (direction)
+        {
+        case 0:
+            if (puzzle_y[puzzle_i[movenum_2]] < puzzle_y[puzzle_i[8]])
+                puzzle_y[puzzle_i[movenum_2]] += movespeed;
+            else
+            {
+                puzzle_y[puzzle_i[movenum_2]] = save;
+                puzzle_i[8] = movenum_1 - 3;
+                puzzle_i[movenum_2] = movenum_1;
+                clickpuzzle = false;
+                direction = -1;
+            }
+            break;
+
+        case 1:
+            if (puzzle_x[puzzle_i[movenum_2]] < puzzle_x[puzzle_i[8]])
+                puzzle_x[puzzle_i[movenum_2]] += movespeed;
+            else
+            {
+                puzzle_x[puzzle_i[movenum_2]] = save;
+                puzzle_i[8] = movenum_1 - 1;
+                puzzle_i[movenum_2] = movenum_1;
+                clickpuzzle = false;
+                direction = -1;
+            }
+            break;
+
+        case 2:
+            if (puzzle_x[puzzle_i[movenum_2]] > puzzle_x[puzzle_i[8]])
+                puzzle_x[puzzle_i[movenum_2]] -= movespeed;
+            else
+            {
+                puzzle_x[puzzle_i[movenum_2]] = save;
+                puzzle_i[8] = movenum_1 + 1;
+                puzzle_i[movenum_2] = movenum_1;
+                clickpuzzle = false;
+                direction = -1;
+            }
+            break;
+
+        case 3:
+            if (puzzle_y[puzzle_i[movenum_2]] > puzzle_y[puzzle_i[8]])
+                puzzle_y[puzzle_i[movenum_2]] -= movespeed;
+            else
+            {
+                puzzle_y[puzzle_i[movenum_2]] = save;
+                puzzle_i[8] = movenum_1 + 3;
+                puzzle_i[movenum_2] = movenum_1;
+                clickpuzzle = false;
+                direction = -1;
+            }
+            break;
+
+        }
+    }
 }
 
 void Puzzle::gameClear()
