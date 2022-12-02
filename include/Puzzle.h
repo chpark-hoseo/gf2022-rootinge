@@ -24,5 +24,5 @@ private:
     int movenum_1;
     int movenum_2;
     int save;
-    int movespeed = 10;
+    int movespeed = 15;
 };
