@@ -36,7 +36,7 @@ void Player::handleInput()
 
     Vector2D* vec = TheInputHandler::Instance()->getMousePosition();
     m_velocity = (*vec - m_position - Vector2D(25, 25)) / 1;
-    printf("%d\n", vec->getX());
+
     if (m_velocity.getX() < 0)
     {
         m_currentRow = 0;
