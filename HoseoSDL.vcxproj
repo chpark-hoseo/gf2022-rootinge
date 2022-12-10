@@ -147,6 +147,7 @@
     <ClCompile Include="src\GameManager.cpp" />
     <ClCompile Include="src\InputHandler.cpp" />
     <ClCompile Include="src\main.cpp" />
+    <ClCompile Include="src\Piece.cpp" />
     <ClCompile Include="src\Player.cpp" />
     <ClCompile Include="src\Puzzle.cpp" />
     <ClCompile Include="src\SDLGameObject.cpp" />
@@ -160,6 +161,7 @@
     <ClInclude Include="include\InputHandler.h" />
     <ClInclude Include="include\LoaderParams.h" />
     <ClInclude Include="include\main.h" />
+    <ClInclude Include="include\Piece.h" />
     <ClInclude Include="include\Player.h" />
     <ClInclude Include="include\Puzzle.h" />
     <ClInclude Include="include\SDLGameObject.h" />

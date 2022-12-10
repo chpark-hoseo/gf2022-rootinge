@@ -1,7 +1,7 @@
 #pragma once
 #include "SDLGameObject.h"
 #include "Player.h"
-
+#include <vector>
 
 class Puzzle : public SDLGameObject {
 public:
@@ -15,14 +15,19 @@ public:
     void handleInput();
     void gameClear();
     void swutchpuzzle();
+
+    static int puzzle_x[9];
+    static int puzzle_y[9];
+    static int puzzle_i[9];
 private:
-    int puzzle_x[9] = { 50, 233, 416, 50, 233, 416, 50, 233, 416};
-    int puzzle_y[9] = { 50, 50, 50, 233, 233, 233, 416, 416, 416};
-    int puzzle_i[9] = { 0,1,2,3,4,5,6,7,8 };
+
+
     int direction;
     bool clickpuzzle = false;
     int movenum_1;
     int movenum_2;
     int save;
     int movespeed = 15;
+
+    std::vector<GameObject*> m_piece;
 };

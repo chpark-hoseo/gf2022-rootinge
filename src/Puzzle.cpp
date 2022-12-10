@@ -2,22 +2,44 @@
 #include "Puzzle.h"
 #include "InputHandler.h"
 #include "GameManager.h"
+#include "Piece.h"
 
+int Puzzle::puzzle_x[9] = { 50, 233, 416, 50, 233, 416, 50, 233, 416 };
+int Puzzle::puzzle_y[9] = { 50, 50, 50, 233, 233, 233, 416, 416, 416 };
+int Puzzle::puzzle_i[9] = { 0,1,2,3,4,5,6,7,8 };
 
-Puzzle::Puzzle(const LoaderParams* pParams) : SDLGameObject(pParams) { randpuzzle(); }
+Puzzle::Puzzle(const LoaderParams* pParams) : SDLGameObject(pParams) { 
+
+    randpuzzle(); 
+    m_piece.push_back(new Piece(new LoaderParams(puzzle_x[puzzle_i[0]], puzzle_y[puzzle_i[0]], 183, 183, m_textureID), 0, 0, 0));
+    m_piece.push_back(new Piece(new LoaderParams(puzzle_x[puzzle_i[1]], puzzle_y[puzzle_i[1]], 183, 183, m_textureID), 0, 1, 1));
+    m_piece.push_back(new Piece(new LoaderParams(puzzle_x[puzzle_i[2]], puzzle_y[puzzle_i[2]], 183, 183, m_textureID), 0, 2, 2));
+   
+    m_piece.push_back(new Piece(new LoaderParams(puzzle_x[puzzle_i[3]], puzzle_y[puzzle_i[3]], 183, 183, m_textureID), 1, 0, 3));
+    m_piece.push_back(new Piece(new LoaderParams(puzzle_x[puzzle_i[4]], puzzle_y[puzzle_i[4]], 183, 183, m_textureID), 1, 1, 4));
+    m_piece.push_back(new Piece(new LoaderParams(puzzle_x[puzzle_i[5]], puzzle_y[puzzle_i[5]], 183, 183, m_textureID), 1, 2, 5));
+    
+    m_piece.push_back(new Piece(new LoaderParams(puzzle_x[puzzle_i[6]], puzzle_y[puzzle_i[6]], 183, 183, m_textureID), 2, 0, 6));
+    m_piece.push_back(new Piece(new LoaderParams(puzzle_x[puzzle_i[7]], puzzle_y[puzzle_i[7]], 183, 183, m_textureID), 2, 1, 7));
+}
 
 void Puzzle::draw()
 {
-    TheTextureManager::Instance()->drawFrame(m_textureID, puzzle_x[puzzle_i[0]], puzzle_y[puzzle_i[0]], 183, 183, m_currentRow * 3 + 0, m_currentFrame * 3 + 0, TheGame::Instance()->getRenderer()); // 0,0
-    TheTextureManager::Instance()->drawFrame(m_textureID, puzzle_x[puzzle_i[1]], puzzle_y[puzzle_i[1]], 183, 183, m_currentRow * 3 + 0, m_currentFrame * 3 + 1, TheGame::Instance()->getRenderer()); // 0,1
-    TheTextureManager::Instance()->drawFrame(m_textureID, puzzle_x[puzzle_i[2]], puzzle_y[puzzle_i[2]], 183, 183, m_currentRow * 3 + 0, m_currentFrame * 3 + 2, TheGame::Instance()->getRenderer()); // 0,2
+    //TheTextureManager::Instance()->drawFrame(m_textureID, puzzle_x[puzzle_i[0]], puzzle_y[puzzle_i[0]], 183, 183, m_currentRow * 3 + 0, m_currentFrame * 3 + 0, TheGame::Instance()->getRenderer()); // 0,0
+    //TheTextureManager::Instance()->drawFrame(m_textureID, puzzle_x[puzzle_i[1]], puzzle_y[puzzle_i[1]], 183, 183, m_currentRow * 3 + 0, m_currentFrame * 3 + 1, TheGame::Instance()->getRenderer()); // 0,1
+    //TheTextureManager::Instance()->drawFrame(m_textureID, puzzle_x[puzzle_i[2]], puzzle_y[puzzle_i[2]], 183, 183, m_currentRow * 3 + 0, m_currentFrame * 3 + 2, TheGame::Instance()->getRenderer()); // 0,2
 
-    TheTextureManager::Instance()->drawFrame(m_textureID, puzzle_x[puzzle_i[3]], puzzle_y[puzzle_i[3]], 183, 183, m_currentRow * 3 + 1, m_currentFrame * 3 + 0, TheGame::Instance()->getRenderer()); // 1,0
-    TheTextureManager::Instance()->drawFrame(m_textureID, puzzle_x[puzzle_i[4]], puzzle_y[puzzle_i[4]], 183, 183, m_currentRow * 3 + 1, m_currentFrame * 3 + 1, TheGame::Instance()->getRenderer()); // 1,1
-    TheTextureManager::Instance()->drawFrame(m_textureID, puzzle_x[puzzle_i[5]], puzzle_y[puzzle_i[5]], 183, 183, m_currentRow * 3 + 1, m_currentFrame * 3 + 2, TheGame::Instance()->getRenderer()); // 1,2
+    //TheTextureManager::Instance()->drawFrame(m_textureID, puzzle_x[puzzle_i[3]], puzzle_y[puzzle_i[3]], 183, 183, m_currentRow * 3 + 1, m_currentFrame * 3 + 0, TheGame::Instance()->getRenderer()); // 1,0
+    //TheTextureManager::Instance()->drawFrame(m_textureID, puzzle_x[puzzle_i[4]], puzzle_y[puzzle_i[4]], 183, 183, m_currentRow * 3 + 1, m_currentFrame * 3 + 1, TheGame::Instance()->getRenderer()); // 1,1
+    //TheTextureManager::Instance()->drawFrame(m_textureID, puzzle_x[puzzle_i[5]], puzzle_y[puzzle_i[5]], 183, 183, m_currentRow * 3 + 1, m_currentFrame * 3 + 2, TheGame::Instance()->getRenderer()); // 1,2
 
-    TheTextureManager::Instance()->drawFrame(m_textureID, puzzle_x[puzzle_i[6]], puzzle_y[puzzle_i[6]], 183, 183, m_currentRow * 3 + 2, m_currentFrame * 3 + 0, TheGame::Instance()->getRenderer()); // 2,0
-    TheTextureManager::Instance()->drawFrame(m_textureID, puzzle_x[puzzle_i[7]], puzzle_y[puzzle_i[7]], 183, 183, m_currentRow * 3 + 2, m_currentFrame * 3 + 1, TheGame::Instance()->getRenderer()); // 2,1
+    //TheTextureManager::Instance()->drawFrame(m_textureID, puzzle_x[puzzle_i[6]], puzzle_y[puzzle_i[6]], 183, 183, m_currentRow * 3 + 2, m_currentFrame * 3 + 0, TheGame::Instance()->getRenderer()); // 2,0
+    //TheTextureManager::Instance()->drawFrame(m_textureID, puzzle_x[puzzle_i[7]], puzzle_y[puzzle_i[7]], 183, 183, m_currentRow * 3 + 2, m_currentFrame * 3 + 1, TheGame::Instance()->getRenderer()); // 2,1
+
+    for (int i = 0; i < m_piece.size(); i++)
+    {
+        m_piece[i]->draw();
+    }
 
     if(TheGameManager::Instance()->m_clear == 1)
         SDLGameObject::draw();
@@ -26,9 +48,15 @@ void Puzzle::draw()
 void Puzzle::update()
 {
     handleInput();
-    m_currentFrame = Player::Player_currentFrame;
-    m_currentRow = Player::Player_currentRow;
+    //m_currentFrame = Player::Player_currentFrame;
+    //m_currentRow = Player::Player_currentRow;
+    for (int i = 0; i < m_piece.size(); i++)
+    {
+        m_piece[i]->update();
+    }
     swutchpuzzle();
+
+
     gameClear();
 }
 
