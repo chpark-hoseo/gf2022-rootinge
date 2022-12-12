@@ -6,7 +6,7 @@
 
 int Puzzle::puzzle_x[9] = { 50, 233, 416, 50, 233, 416, 50, 233, 416 };
 int Puzzle::puzzle_y[9] = { 50, 50, 50, 233, 233, 233, 416, 416, 416 };
-int Puzzle::puzzle_i[9] = { 0,1,2,3,4,5,6,7,8 };
+int Puzzle::puzzle_i[9] = { 0,};
 
 Puzzle::Puzzle(const LoaderParams* pParams) : SDLGameObject(pParams) { 
 
@@ -28,11 +28,9 @@ void Puzzle::draw()
     //TheTextureManager::Instance()->drawFrame(m_textureID, puzzle_x[puzzle_i[0]], puzzle_y[puzzle_i[0]], 183, 183, m_currentRow * 3 + 0, m_currentFrame * 3 + 0, TheGame::Instance()->getRenderer()); // 0,0
     //TheTextureManager::Instance()->drawFrame(m_textureID, puzzle_x[puzzle_i[1]], puzzle_y[puzzle_i[1]], 183, 183, m_currentRow * 3 + 0, m_currentFrame * 3 + 1, TheGame::Instance()->getRenderer()); // 0,1
     //TheTextureManager::Instance()->drawFrame(m_textureID, puzzle_x[puzzle_i[2]], puzzle_y[puzzle_i[2]], 183, 183, m_currentRow * 3 + 0, m_currentFrame * 3 + 2, TheGame::Instance()->getRenderer()); // 0,2
-
     //TheTextureManager::Instance()->drawFrame(m_textureID, puzzle_x[puzzle_i[3]], puzzle_y[puzzle_i[3]], 183, 183, m_currentRow * 3 + 1, m_currentFrame * 3 + 0, TheGame::Instance()->getRenderer()); // 1,0
     //TheTextureManager::Instance()->drawFrame(m_textureID, puzzle_x[puzzle_i[4]], puzzle_y[puzzle_i[4]], 183, 183, m_currentRow * 3 + 1, m_currentFrame * 3 + 1, TheGame::Instance()->getRenderer()); // 1,1
     //TheTextureManager::Instance()->drawFrame(m_textureID, puzzle_x[puzzle_i[5]], puzzle_y[puzzle_i[5]], 183, 183, m_currentRow * 3 + 1, m_currentFrame * 3 + 2, TheGame::Instance()->getRenderer()); // 1,2
-
     //TheTextureManager::Instance()->drawFrame(m_textureID, puzzle_x[puzzle_i[6]], puzzle_y[puzzle_i[6]], 183, 183, m_currentRow * 3 + 2, m_currentFrame * 3 + 0, TheGame::Instance()->getRenderer()); // 2,0
     //TheTextureManager::Instance()->drawFrame(m_textureID, puzzle_x[puzzle_i[7]], puzzle_y[puzzle_i[7]], 183, 183, m_currentRow * 3 + 2, m_currentFrame * 3 + 1, TheGame::Instance()->getRenderer()); // 2,1
 
@@ -43,13 +41,14 @@ void Puzzle::draw()
 
     if(TheGameManager::Instance()->m_clear == 1)
         SDLGameObject::draw();
+    else if (TheGameManager::Instance()->m_clear == 2)
+        SDLGameObject::draw();
 }
 
 void Puzzle::update()
 {
     handleInput();
-    //m_currentFrame = Player::Player_currentFrame;
-    //m_currentRow = Player::Player_currentRow;
+
     for (int i = 0; i < m_piece.size(); i++)
     {
         m_piece[i]->update();
@@ -69,6 +68,20 @@ void Puzzle::handleInput()
 {
     if (TheInputHandler::Instance()->getMouseButtonState(LEFT) && !clickpuzzle) {
         blockswitch();
+        for (int i = 0; i < 9; i++)
+        {
+            for (int j = 0; j < 9; j++)
+            {
+                if (i == puzzle_i[j])
+                {
+                    printf("%d ", j);
+                    break;
+                }
+            }
+            if ((i + 1) % 3 == 0)
+                printf("\n");
+        }
+        printf("\n");
     }
 }
 
@@ -80,7 +93,7 @@ void Puzzle::randpuzzle()
     int count = 0;
     int isSame = 0;
     int inversion = 0;
-    int arr[9] = { 0,1,2,3,4,5,6,7,8 };
+    int arr[9] = { 0,};
     while (1)
     {
         count = 0;
@@ -143,19 +156,7 @@ void Puzzle::randpuzzle()
     }
     printf("섞기 완료!\n");
 
-    for (int i = 0; i < 9; i++)
-    {
-        for (int j = 0; j < 9; j++)
-        {
-            if (i == puzzle_i[j])
-            {
-                printf("%d ", j);
-                break;
-            }
-        }
-        if ((i + 1) % 3 == 0)
-            printf("\n");
-    }
+    
 
     //{// 주작용
     //    for (int i = 0; i < 7; i++)
@@ -207,8 +208,7 @@ void Puzzle::switchcode(int innum)
                 save = puzzle_y[puzzle_i[movenum_2]];
 
             clickpuzzle = true;
-           /* puzzle_i[8] = innum - 3;
-            puzzle_i[change] = innum;*/
+
         }
     }
     // 왼쪽
@@ -233,8 +233,6 @@ void Puzzle::switchcode(int innum)
                 save = puzzle_x[puzzle_i[movenum_2]];
 
             clickpuzzle = true;
-            /*puzzle_i[8] = innum - 1;
-            puzzle_i[change] = innum;*/
         }
     }
     // 오른쪽
@@ -260,8 +258,6 @@ void Puzzle::switchcode(int innum)
 
             clickpuzzle = true;
 
-            /*puzzle_i[8] = innum + 1;
-            puzzle_i[change] = innum;*/
         }
     }
     // 아래
@@ -287,8 +283,6 @@ void Puzzle::switchcode(int innum)
 
             clickpuzzle = true;
 
-            /*puzzle_i[8] = innum + 3;
-            puzzle_i[change] = innum;*/
         }
     }
 
@@ -355,6 +349,7 @@ void Puzzle::swutchpuzzle()
 
         }
     }
+
 }
 
 void Puzzle::gameClear()
@@ -366,5 +361,14 @@ void Puzzle::gameClear()
 
         
     }
-    TheGameManager::Instance()->m_clear = 1;
+    randpuzzle();
+    if (TheGameManager::Instance()->m_stage == 0)
+    {
+        TheGameManager::Instance()->m_clear = 1;
+    }
+    else if (TheGameManager::Instance()->m_stage == 1)
+    {
+        TheGameManager::Instance()->m_clear = 2;
+    }
+    
 }

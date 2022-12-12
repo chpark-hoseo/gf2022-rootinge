@@ -25,18 +25,37 @@ void Clear::handleInput()
 {
 	SDL_ShowCursor(true);
 	Vector2D* vec = TheInputHandler::Instance()->getMousePosition();
-	if (vec->getX() >= 240 && vec->getX() <= 440 && vec->getY() >= 165 && vec->getY() <= 262)
+	if (TheGameManager::Instance()->m_clear == 1)
 	{
-		if (TheInputHandler::Instance()->getMouseButtonState(LEFT)) {
-			TheGameManager::Instance()->m_stage = 1;
-			TheGameManager::Instance()->m_clear = 0;
+		if (vec->getX() >= 240 && vec->getX() <= 440 && vec->getY() >= 165 && vec->getY() <= 262)
+		{
+			if (TheInputHandler::Instance()->getMouseButtonState(LEFT)) {
+				TheGameManager::Instance()->m_stage = 1;
+				TheGameManager::Instance()->m_clear = 0;
+			}
+		}
+		else if (vec->getX() >= 70 && vec->getX() <= 170 && vec->getY() >= 490 && vec->getY() <= 590)
+		{
+			if (TheInputHandler::Instance()->getMouseButtonState(LEFT)) {
+				SDL_Quit();
+			}
 		}
 	}
-	else if (vec->getX() >= 70 && vec->getX() <= 170 && vec->getY() >= 490 && vec->getY() <= 590)
+	else if (TheGameManager::Instance()->m_clear == 2)
 	{
-		if (TheInputHandler::Instance()->getMouseButtonState(LEFT)) {
-			SDL_Quit();
+		if (vec->getX() >= 230 && vec->getX() <= 430 && vec->getY() >= 165 && vec->getY() <= 208)
+		{
+			if (TheInputHandler::Instance()->getMouseButtonState(LEFT)) {
+				SDL_Quit();
+			}
+		}
+		else if (vec->getX() >= 70 && vec->getX() <= 170 && vec->getY() >= 490 && vec->getY() <= 590)
+		{
+			if (TheInputHandler::Instance()->getMouseButtonState(LEFT)) {
+				SDL_Quit();
+			}
 		}
 	}
+	
 	
 }

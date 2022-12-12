@@ -11,7 +11,7 @@
 #include "Puzzle.h"
 #include "GameManager.h"
 #include "Clear.h"
-
+#include "Start.h"
 
 class Game
 {
@@ -43,8 +43,11 @@ public:
 private: 
 	static Game* s_pInstance;
 
-	std::vector<GameObject*> m_gameObjects;
+	std::vector<GameObject*> m_gamePlay0;
+	std::vector<GameObject*> m_gamePlay1;
+	std::vector<GameObject*> m_gamePlay2;
 	std::vector<GameObject*> m_gameClear;
+	std::vector<GameObject*> m_gameClear1;
 
 	
 
